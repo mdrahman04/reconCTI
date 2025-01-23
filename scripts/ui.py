@@ -44,12 +44,3 @@ def ui_initialization():
     print("Select a mode to continue:")
     print("1. Guided Mode - Step-by-step guidance")
     print("2. Commando Mode - Input the whole command directly\n")
-
-    # Input validation
-    while True:
-        mode = input("Enter your choice (1 or 2): ").strip()
-        if mode in ['1', '2']:
-            print("\nYou have selected:", "Guided Mode" if mode == '1' else "Commando Mode")
-            return mode
-        else:
-            print("Invalid choice. Please enter 1 or 2.\n")
