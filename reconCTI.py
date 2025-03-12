@@ -1,9 +1,8 @@
-import os
 from scripts.ui import ui_initialization
 from scripts.modes import guided_mode, commando_mode
 
 def main():
-    mode = ui_initialization()  # Start UI and get user choice
+    mode = ui_initialization()
     while True:
         mode = input("Enter your choice (1 or 2): ").strip()
         if mode == '1':
