@@ -1,3 +1,32 @@
 {
-    "searches": []
+    "searches": [
+        {
+            "time": "2025-03-12 23:15:06.520818",
+            "inputs": [
+                {
+                    "data_type": "name",
+                    "data_value": "john"
+                }
+            ],
+            "search_mode": "or",
+            "onion_links": "no",
+            "websites": [
+                "www.google.com"
+            ]
+        },
+        {
+            "time": "2025-03-12 23:17:16.730127",
+            "inputs": [
+                {
+                    "data_type": "phone",
+                    "data_value": "09230234"
+                }
+            ],
+            "search_mode": "and",
+            "onion_links": "no",
+            "websites": [
+                "www.google.com"
+            ]
+        }
+    ]
 }

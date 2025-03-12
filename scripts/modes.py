@@ -7,6 +7,9 @@ from datetime import datetime
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(SCRIPT_DIR)
 
+import scraper  # Import the scraper to use scrape_website()
+from tor_connection import check_tor_status  # Ensure Tor is running before scraping
+
 def load_history():
     if not os.path.exists("history.json"):
         with open("history.json", "w") as f:
@@ -17,16 +20,13 @@ def load_history():
     with open("history.json", "r") as f:
         return json.load(f)
 
-
 def save_history(history):
     with open("history.json", "w") as f:
         json.dump(history, f, indent=4)
 
-
 def add_timestamped_entry(entry):
     entry["timestamp"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return entry
-
 
 def guided_mode():
     print("\n[Guided Mode] Please answer the following questions step by step:\n")
@@ -68,8 +68,9 @@ def guided_mode():
             break
 
     if onion_links == "yes":
-        import tor_connection  # This will check and start Tor
-        tor_connection.start_tor()
+        if not check_tor_status():
+            print("[Error] Tor is required but is not working. Please check your Tor setup.")
+            return  # Stop execution if Tor is not working
 
     while True:
         websites = input("\nAdd websites to search (comma-separated): ").strip()
@@ -85,6 +86,8 @@ def guided_mode():
     save_history(history)
     print("\n[Info] Proceeding to scrape the data ...")
 
+    # ✅ Start the scraper
+    scraper.scrape_website(search_data)
 
 def commando_mode():
     print("\n[Commando Mode] Please input your command as follows:")
@@ -119,8 +122,9 @@ def commando_mode():
                 raise ValueError("Error: Onion links query must be 'yes' or 'no'.")
 
             if onion_links == "yes":
-                import tor_connection  # This will check and start Tor
-                tor_connection.start_tor()
+                if not check_tor_status():
+                    print("[Error] Tor is required but is not working. Please check your Tor setup.")
+                    return  # Stop execution if Tor is not working
 
             websites = [site.strip() for site in parts[4].split(",")]
             if not websites:
@@ -138,3 +142,6 @@ def commando_mode():
 
     save_history(history)
     print("\n[Info] Proceeding to scrape the data ...")
+
+    # ✅ Start the scraper
+    scraper.scrape_website(search_data)
