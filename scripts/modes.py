@@ -1,8 +1,11 @@
 import json
 import os
 import re
+import sys
 from datetime import datetime
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(SCRIPT_DIR)
 
 def load_history():
     if not os.path.exists("history.json"):
