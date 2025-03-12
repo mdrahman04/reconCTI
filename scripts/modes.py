@@ -65,8 +65,8 @@ def guided_mode():
             break
 
     if onion_links == "yes":
-        import tor  # This will check and start Tor
-        tor.start_tor()
+        import tor_connection  # This will check and start Tor
+        tor_connection.start_tor()
 
     while True:
         websites = input("\nAdd websites to search (comma-separated): ").strip()
@@ -116,8 +116,8 @@ def commando_mode():
                 raise ValueError("Error: Onion links query must be 'yes' or 'no'.")
 
             if onion_links == "yes":
-                import tor  # This will check and start Tor
-                tor.start_tor()
+                import tor_connection  # This will check and start Tor
+                tor_connection.start_tor()
 
             websites = [site.strip() for site in parts[4].split(",")]
             if not websites:
