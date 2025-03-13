@@ -1,5 +1,4 @@
 import os
-import re
 import json
 import requests
 from urllib.parse import urljoin, urlparse
@@ -69,7 +68,7 @@ def find_similar_data(html, search_values, search_mode):
     return matches
 
 
-def scrape_website(url, search_values, search_mode, onion_links):
+def scrape_single_website(url, search_values, search_mode, onion_links):
     """Scrape a given website recursively for data."""
     visited_urls = set()
     results = []
@@ -114,8 +113,8 @@ def scrape_website(url, search_values, search_mode, onion_links):
     return results
 
 
-def start_scraper(search_data):
-    """Initiate the scraping process."""
+def scrape_website(search_data):
+    """Initiate the scraping process using search_data dictionary."""
     search_values = [entry["data_value"] for entry in search_data["inputs"]]
     search_mode = search_data["search_mode"]
     onion_links = search_data["onion_links"]
@@ -126,7 +125,7 @@ def start_scraper(search_data):
     all_results = load_existing_results()
 
     for website in websites:
-        results = scrape_website(website, search_values, search_mode, onion_links)
+        results = scrape_single_website(website, search_values, search_mode, onion_links)
         all_results["results"].extend(results)
 
     save_results(all_results)
@@ -137,4 +136,3 @@ def start_scraper(search_data):
         save_results(all_results, separate=True)
 
     print("\n[✔] Scraping completed!")
-
