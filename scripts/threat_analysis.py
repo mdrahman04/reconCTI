@@ -53,19 +53,15 @@ def map_to_mitre(data_type):
             }
     return {}
 
-def extract_data_types_from_history():
-    """Pull all unique data types from history.json."""
-    history = load_json_file(HISTORY_FILE)
-    if not history:
+def extract_first_data_types_from_history():
+    """Extract all data types from the first entry in history.json."""
+    history_data = load_json_file(HISTORY_FILE)
+    if not history_data or "searches" not in history_data or not history_data["searches"]:
         return []
 
-    data_types = set()
-    for entry in history.get("history", []):
-        for item in entry.get("inputs", []):
-            data_type = item.get("data_value")
-            if data_type:
-                data_types.add(data_type.strip().lower())
-    return list(data_types)
+    first_entry = history_data["searches"][0]
+    inputs = first_entry.get("inputs", [])
+    return [i.get("data_type", "").strip().lower() for i in inputs if "data_type" in i]
 
 def perform_threat_analysis(_):
     print("\n[+] Starting threat analysis...")
@@ -80,7 +76,7 @@ def perform_threat_analysis(_):
         print("[!] No usable results in scrape file.")
         return
 
-    data_types = extract_data_types_from_history()
+    data_types = extract_first_data_types_from_history()
     if not data_types:
         print("[!] Could not identify data types from history.")
         return
@@ -110,7 +106,7 @@ def perform_threat_analysis(_):
 
             # Add MITRE info
             mitre_mapping = map_to_mitre(data_type)
-            threat_summary.update({"mitre_mapping": mitre_mapping})
+            threat_summary["mitre_mapping"] = mitre_mapping
 
             full_analysis.append(threat_summary)
 
@@ -120,4 +116,3 @@ def perform_threat_analysis(_):
         print(f"\n[✔] Threat analysis complete. Report data saved to {ANALYSIS_OUTPUT_FILE}")
     else:
         print("[✔] Analysis complete. No critical threats found or matched.")
-
