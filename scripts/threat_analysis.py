@@ -1,6 +1,7 @@
 import os
 import json
 import re
+import subprocess
 
 # Paths
 CVE_FILE = "dat/cve.json"
@@ -53,15 +54,15 @@ def map_to_mitre(data_type):
             }
     return {}
 
-def extract_latest_data_types_from_history():
-    """Extract all data types from the latest (last) entry in history.json."""
+def extract_latest_data_values_and_types():
+    """Extract data values and their corresponding types from the latest entry in history.json."""
     history_data = load_json_file(HISTORY_FILE)
     if not history_data or "searches" not in history_data or not history_data["searches"]:
         return []
 
     last_entry = history_data["searches"][-1]
     inputs = last_entry.get("inputs", [])
-    return [i.get("data_type", "").strip().lower() for i in inputs if "data_type" in i]
+    return [(i.get("data_value", "").strip().lower(), i.get("data_type", "").strip()) for i in inputs]
 
 def perform_threat_analysis(_):
     print("\n[+] Starting threat analysis...")
@@ -76,43 +77,50 @@ def perform_threat_analysis(_):
         print("[!] No usable results in scrape file.")
         return
 
-    data_types = extract_latest_data_types_from_history()
-    if not data_types:
-        print("[!] Could not identify data types from history.")
+    inputs = extract_latest_data_values_and_types()
+    if not inputs:
+        print("[!] Could not extract data values from history.")
         return
 
     full_analysis = []
 
     for threat in scrape_results["results"]:
-        searched_for = threat.get("searched_for", [])
-        if not isinstance(searched_for, list):
-            searched_for = [searched_for]
+        matched_value = threat.get("matched_value", "").strip().lower()
 
-        for data_type in searched_for:
-            if data_type.lower() not in data_types:
-                continue
+        for input_value, input_type in inputs:
+            if matched_value == input_value:
+                threat_summary = {
+                    "data_type": input_type,
+                    "matched_value": matched_value,
+                    "found_in": threat.get("found_in"),
+                    "website": threat.get("website"),
+                    "highlight_link": threat.get("highlight_link")
+                }
 
-            threat_summary = {
-                "data_type": data_type,
-                "matched_value": threat.get("matched_value"),
-                "found_in": threat.get("found_in"),
-                "website": threat.get("website"),
-                "highlight_link": threat.get("highlight_link")
-            }
+                # Add CVE info
+                local_cve = analyze_against_local_cve(input_type)
+                threat_summary.update(local_cve)
 
-            # Add CVE info
-            local_cve = analyze_against_local_cve(data_type)
-            threat_summary.update(local_cve)
+                # Add MITRE info
+                mitre_mapping = map_to_mitre(input_type)
+                threat_summary["mitre_mapping"] = mitre_mapping
 
-            # Add MITRE info
-            mitre_mapping = map_to_mitre(data_type)
-            threat_summary["mitre_mapping"] = mitre_mapping
+                full_analysis.append(threat_summary)
+                break  # No need to check further if match found
 
-            full_analysis.append(threat_summary)
+    # Write analysis JSON file even if empty
+    with open(ANALYSIS_OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(full_analysis, f, indent=4)
 
     if full_analysis:
-        with open(ANALYSIS_OUTPUT_FILE, "w", encoding="utf-8") as f:
-            json.dump(full_analysis, f, indent=4)
-        print(f"\n[✔] Threat analysis complete. Report data saved to {ANALYSIS_OUTPUT_FILE}")
+        print(f"\n[✔] Threats detected. Report saved to {ANALYSIS_OUTPUT_FILE}")
     else:
-        print("[✔] Analysis complete. No critical threats found or matched.")
+        print("[✔] Analysis complete. No threats matched, but report still saved.")
+
+    # Always generate PDF
+    try:
+        subprocess.run(["python", "scripts/threat_report.py"], check=True)
+        print("[✔] PDF report generated successfully.")
+    except subprocess.CalledProcessError:
+        print("[!] Failed to generate PDF report.")
+
