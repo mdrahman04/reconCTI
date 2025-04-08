@@ -1,0 +1,16 @@
+[
+    {
+        "type": "name",
+        "tactic": "Reconnaissance",
+        "technique": "Gather Victim Identity Information",
+        "description": "Adversaries gather personal information like full names to prepare for social engineering.",
+        "mitigation_id": "M1017"
+    },
+    {
+        "type": "email",
+        "tactic": "Initial Access",
+        "technique": "Spearphishing via Service",
+        "description": "Adversaries use email addresses to deliver malicious content.",
+        "mitigation_id": "M1021"
+    }
+]

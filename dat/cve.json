@@ -1,0 +1,12 @@
+[
+    {
+        "type": "name",
+        "possible_risks": ["Identity theft", "Doxxing"],
+        "mitigations": ["Avoid sharing personal identifiers online", "Use aliases when possible"]
+    },
+    {
+        "type": "email",
+        "possible_risks": ["Phishing", "Spam"],
+        "mitigations": ["Use disposable emails", "Enable spam filters"]
+    }
+]
