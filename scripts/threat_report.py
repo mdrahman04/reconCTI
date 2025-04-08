@@ -3,8 +3,10 @@ import os
 from fpdf import FPDF
 import webbrowser
 
+# File locations
 ANALYSIS_FILE = "temp_analysis.json"
-REPORT_FILE = "threat_report.pdf"
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REPORT_FILE = os.path.join(ROOT_DIR, "threat_report.pdf")
 
 
 class PDFReport(FPDF):
@@ -86,8 +88,14 @@ def generate_pdf_report():
     print(f"[✔] Report generated: {REPORT_FILE}")
 
     try:
-        webbrowser.open_new_tab(f"file://{os.path.abspath(REPORT_FILE)}")
+        # Open using Firefox explicitly
+        webbrowser.register('firefox', None, webbrowser.BackgroundBrowser('/usr/bin/firefox'))
+        webbrowser.get('firefox').open_new_tab(f"file://{REPORT_FILE}")
         print("[✔] Report opened in browser.")
     except Exception as e:
         print(f"[!] Could not open report automatically: {e}")
 
+
+# Uncomment this if you want the script to run standalone for testing
+# if __name__ == "__main__":
+#     generate_pdf_report()
