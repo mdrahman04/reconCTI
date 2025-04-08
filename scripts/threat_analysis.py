@@ -53,14 +53,14 @@ def map_to_mitre(data_type):
             }
     return {}
 
-def extract_first_data_types_from_history():
-    """Extract all data types from the first entry in history.json."""
+def extract_latest_data_types_from_history():
+    """Extract all data types from the latest (last) entry in history.json."""
     history_data = load_json_file(HISTORY_FILE)
     if not history_data or "searches" not in history_data or not history_data["searches"]:
         return []
 
-    first_entry = history_data["searches"][0]
-    inputs = first_entry.get("inputs", [])
+    last_entry = history_data["searches"][-1]
+    inputs = last_entry.get("inputs", [])
     return [i.get("data_type", "").strip().lower() for i in inputs if "data_type" in i]
 
 def perform_threat_analysis(_):
@@ -76,7 +76,7 @@ def perform_threat_analysis(_):
         print("[!] No usable results in scrape file.")
         return
 
-    data_types = extract_first_data_types_from_history()
+    data_types = extract_latest_data_types_from_history()
     if not data_types:
         print("[!] Could not identify data types from history.")
         return
