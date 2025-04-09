@@ -85,27 +85,31 @@ def perform_threat_analysis(_):
 
     for threat in scrape_results["results"]:
         matched_value = threat.get("matched_value", "").strip().lower()
+        matched_input_types = set()
 
+        # Instead of exact match, check if input value is *in* the matched value
         for input_value, input_type in inputs:
-            if matched_value == input_value:
-                threat_summary = {
-                    "data_type": input_type,
-                    "matched_value": matched_value,
-                    "found_in": threat.get("found_in"),
-                    "website": threat.get("website"),
-                    "highlight_link": threat.get("highlight_link")
-                }
+            if input_value in matched_value:
+                matched_input_types.add(input_type)
 
-                # Add CVE info
-                local_cve = analyze_against_local_cve(input_type)
-                threat_summary.update(local_cve)
+        for input_type in matched_input_types:
+            threat_summary = {
+                "data_type": input_type,
+                "matched_value": matched_value,
+                "found_in": threat.get("found_in"),
+                "website": threat.get("website"),
+                "highlight_link": threat.get("highlight_link")
+            }
 
-                # Add MITRE info
-                mitre_mapping = map_to_mitre(input_type)
-                threat_summary["mitre_mapping"] = mitre_mapping
+            # Add CVE info
+            local_cve = analyze_against_local_cve(input_type)
+            threat_summary.update(local_cve)
 
-                full_analysis.append(threat_summary)
-                break  # No need to check further if match found
+            # Add MITRE info
+            mitre_mapping = map_to_mitre(input_type)
+            threat_summary["mitre_mapping"] = mitre_mapping
+
+            full_analysis.append(threat_summary)
 
     # Write analysis JSON file even if empty
     with open(ANALYSIS_OUTPUT_FILE, "w", encoding="utf-8") as f:
