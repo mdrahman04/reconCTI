@@ -1,11 +1,12 @@
 import json
 import os
+import time
 from fpdf import FPDF
 import webbrowser
 
-# File locations
-ANALYSIS_FILE = "temp_analysis.json"
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Correct root directory even if run from reconCTI.py
+ROOT_DIR = os.path.abspath(os.getcwd())
+ANALYSIS_FILE = os.path.join(ROOT_DIR, "temp_analysis.json")
 REPORT_FILE = os.path.join(ROOT_DIR, "threat_report.pdf")
 
 
@@ -66,6 +67,8 @@ class PDFReport(FPDF):
 
 
 def generate_pdf_report():
+    time.sleep(0.2)  # Short delay to ensure file write completion
+
     if not os.path.exists(ANALYSIS_FILE):
         print("[!] Analysis file not found. Please run threat analysis first.")
         return
@@ -88,14 +91,16 @@ def generate_pdf_report():
     print(f"[✔] Report generated: {REPORT_FILE}")
 
     try:
-        # Open using Firefox explicitly
-        webbrowser.register('firefox', None, webbrowser.BackgroundBrowser('/usr/bin/firefox'))
-        webbrowser.get('firefox').open_new_tab(f"file://{REPORT_FILE}")
-        print("[✔] Report opened in browser.")
-    except Exception as e:
-        print(f"[!] Could not open report automatically: {e}")
+        webbrowser.get("firefox").open(f"file://{REPORT_FILE}")
+        print("[✔] Report opened in Firefox.")
+    except:
+        try:
+            webbrowser.open(f"file://{REPORT_FILE}")
+            print("[✔] Report opened in default browser.")
+        except Exception as e:
+            print(f"[!] Could not open report: {e}")
 
 
-# Uncomment this if you want the script to run standalone for testing
+# Uncomment for standalone testing
 # if __name__ == "__main__":
 #     generate_pdf_report()

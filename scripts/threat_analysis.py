@@ -1,7 +1,6 @@
 import os
 import json
 import re
-import subprocess
 
 # Paths
 CVE_FILE = "dat/cve.json"
@@ -116,11 +115,3 @@ def perform_threat_analysis(_):
         print(f"\n[✔] Threats detected. Report saved to {ANALYSIS_OUTPUT_FILE}")
     else:
         print("[✔] Analysis complete. No threats matched, but report still saved.")
-
-    # Always generate PDF
-    try:
-        subprocess.run(["python", "scripts/threat_report.py"], check=True)
-        print("[✔] PDF report generated successfully.")
-    except subprocess.CalledProcessError:
-        print("[!] Failed to generate PDF report.")
-

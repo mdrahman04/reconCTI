@@ -1,6 +1,8 @@
 from scripts.ui import ui_initialization
 from scripts.modes import guided_mode, commando_mode
 from scripts.threat_analysis import perform_threat_analysis
+from scripts.threat_report import generate_pdf_report  # ✅ Import PDF report function
+
 import os
 import json
 import re
@@ -42,6 +44,11 @@ def start_session():
                 with open(latest_file, "r", encoding="utf-8") as f:
                     all_results = json.load(f)
                     perform_threat_analysis(all_results)
+
+                    # ✅ After analysis, generate the report
+                    print("\n[+] Generating Threat Report PDF...")
+                    generate_pdf_report()
+
             except (json.JSONDecodeError, IOError):
                 print("[!] Failed to load or parse the result file.")
         else:
