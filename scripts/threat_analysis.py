@@ -66,6 +66,9 @@ def extract_latest_data_values_and_types():
 def perform_threat_analysis(_):
     print("\n[+] Starting threat analysis...")
 
+    with open(ANALYSIS_OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump([], f, indent=4)
+
     latest_file = get_latest_scrape_file()
     if not latest_file:
         print("[!] Cannot proceed with analysis. No scrape result found.")

@@ -8,12 +8,11 @@ from scripts.tor_connection import get_tor_session
 
 # Constants
 SCRAPE_RESULTS_FILE = "scrape_results.json"
-MAX_MATCHES_PER_PAGE = 10  # Limit matches per page
-DEFAULT_MAX_DEPTH = 2  # Default recursion depth
+MAX_MATCHES_PER_PAGE = 10
+DEFAULT_MAX_DEPTH = 2
 
 
 def load_existing_results():
-    """Load existing scrape results to avoid duplicates."""
     if not os.path.exists(SCRAPE_RESULTS_FILE):
         return {"results": []}
 
@@ -27,39 +26,32 @@ def load_existing_results():
 
 
 def get_next_result_filename():
-    """Generate a unique filename for saving separate results."""
     existing_files = [f for f in os.listdir() if f.startswith("sc_result-") and f.endswith(".json")]
     next_number = len(existing_files) + 1
     return f"sc_result-{next_number}.json"
 
 
 def save_results(data, separate=False):
-    """Save the scrape results to a JSON file."""
     file_name = SCRAPE_RESULTS_FILE if not separate else get_next_result_filename()
-
     with open(file_name, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
-
     print(f"\n[+] Results saved to {file_name}")
 
 
 def is_valid_url(url):
-    """Check if a URL is valid."""
     parsed = urlparse(url)
     return bool(parsed.scheme) and bool(parsed.netloc)
 
 
 def generate_highlight_link(url, text):
-    """Generate a Chrome-style text fragment highlight link."""
     encoded_text = quote(text)
     return f"{url}#body:~:text={encoded_text}"
 
 
 def find_similar_data(html, search_values, search_mode):
-    """Find similar data in the given HTML content based on user input."""
     soup = BeautifulSoup(html, "lxml")
     matches = defaultdict(list)
-    found_texts = set()  # Avoid duplicate matches
+    found_texts = set()
 
     for tag in soup.find_all(["p", "span", "div", "td", "li", "a"]):
         text = tag.get_text(separator=" ", strip=True)
@@ -84,18 +76,22 @@ def find_similar_data(html, search_values, search_mode):
 
 
 def scrape_single_website(url, search_values, search_mode, onion_links, max_depth):
-    """Scrape a given website recursively with depth control."""
-    visited_urls = set()
+    visited_urls = defaultdict(int)
     seen_links = set()
     results = []
-    root_domain = urlparse(url).netloc
+    root_parsed = urlparse(url)
+    root_path = root_parsed.path.rstrip("/") or "/"
+    root_domain = root_parsed.netloc
     session = get_tor_session() if onion_links == "yes" else requests.Session()
 
+    def is_within_root_path(link):
+        parsed_link = urlparse(link)
+        return parsed_link.path.startswith(root_path)
+
     def crawl(current_url, depth):
-        """Recursive function to scrape all sub-links under the root domain."""
-        if current_url in visited_urls or depth > max_depth:
+        if visited_urls[current_url] >= 2 or depth > max_depth:
             return
-        visited_urls.add(current_url)
+        visited_urls[current_url] += 1
 
         try:
             print(f"[*] Scraping: {current_url}")
@@ -123,10 +119,9 @@ def scrape_single_website(url, search_values, search_mode, onion_links, max_dept
                     })
                     seen_links.add(highlight_link)
 
-        # Extract new links within the same domain
         for a_tag in soup.find_all("a", href=True):
             link = urljoin(current_url, a_tag["href"])
-            if is_valid_url(link) and urlparse(link).netloc == root_domain:
+            if is_valid_url(link) and urlparse(link).netloc == root_domain and is_within_root_path(link):
                 crawl(link, depth + 1)
 
     crawl(url, depth=0)
@@ -134,13 +129,11 @@ def scrape_single_website(url, search_values, search_mode, onion_links, max_dept
 
 
 def scrape_website(search_data):
-    """Initiate the scraping process using search_data dictionary."""
     search_values = [entry["data_value"] for entry in search_data["inputs"]]
     search_mode = search_data["search_mode"]
     onion_links = search_data["onion_links"]
     websites = search_data["websites"]
 
-    # Get user-defined recursion depth
     try:
         max_depth = int(input(f"[?] Enter max depth for scanning (default {DEFAULT_MAX_DEPTH}): ").strip() or DEFAULT_MAX_DEPTH)
     except ValueError:
@@ -148,7 +141,6 @@ def scrape_website(search_data):
 
     print("\n[+] Starting the scraping process...\n")
 
-    # Load existing results
     all_results = load_existing_results()
     new_results = {"results": []}
 
@@ -156,11 +148,9 @@ def scrape_website(search_data):
         results = scrape_single_website(website, search_values, search_mode, onion_links, max_depth)
         new_results["results"].extend(results)
 
-    # Append new results to existing results file
     all_results["results"].extend(new_results["results"])
     save_results(all_results)
 
-    # Ask if user wants to save an additional file
     save_separate = input("\n[?] Do you want to save an additional results file? (yes/no): ").strip().lower()
     if save_separate == "yes":
         save_results(new_results, separate=True)

@@ -351,6 +351,21 @@
             "websites": [
                 "https://www.normalwebsite.com"
             ]
+        },
+        {
+            "time": "2025-04-10 10:21:48.355281",
+            "inputs": [
+                {
+                    "data_type": "Name",
+                    "data_value": "Alpha"
+                }
+            ],
+            "search_mode": "or",
+            "onion_links": "no",
+            "websites": [
+                "https://www.normalwebsite.com",
+                "https://www.normalwebsite.com/now"
+            ]
         }
     ]
 }
