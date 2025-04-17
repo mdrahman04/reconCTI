@@ -12,5 +12,341 @@
         "technique": "Spearphishing via Service",
         "description": "Adversaries use email addresses to deliver malicious content.",
         "mitigation_id": "M1021"
+    },
+    {
+        "type": "phone number",
+        "tactic": "Reconnaissance",
+        "technique": "Phone Number Harvesting",
+        "description": "Phone numbers are used for smishing or vishing attacks.",
+        "mitigation_id": "M1017"
+    },
+    {
+        "type": "address",
+        "tactic": "Reconnaissance",
+        "technique": "Gather Victim Location Information",
+        "description": "Addresses help attackers map physical or organizational locations.",
+        "mitigation_id": "M1016"
+    },
+    {
+        "type": "ip address",
+        "tactic": "Discovery",
+        "technique": "Remote System Discovery",
+        "description": "IP addresses are used to identify target systems on a network.",
+        "mitigation_id": "M1030"
+    },
+    {
+        "type": "credit card",
+        "tactic": "Credential Access",
+        "technique": "Credential Dumping",
+        "description": "Attackers collect credit card details through skimmers or malware.",
+        "mitigation_id": "M1054"
+    },
+    {
+        "type": "passport number",
+        "tactic": "Reconnaissance",
+        "technique": "Gather Victim Identity Information",
+        "description": "Used for impersonation or identity fraud.",
+        "mitigation_id": "M1017"
+    },
+    {
+        "type": "social security number",
+        "tactic": "Reconnaissance",
+        "technique": "Gather Victim Identity Information",
+        "description": "SSNs can be used to conduct fraud or social engineering.",
+        "mitigation_id": "M1017"
+    },
+    {
+        "type": "username",
+        "tactic": "Credential Access",
+        "technique": "Brute Force",
+        "description": "Used in brute-force or password spraying attacks.",
+        "mitigation_id": "M1027"
+    },
+    {
+        "type": "password",
+        "tactic": "Credential Access",
+        "technique": "Credential Dumping",
+        "description": "Passwords can be extracted from memory or keystroke logs.",
+        "mitigation_id": "M1054"
+    },
+    {
+        "type": "date of birth",
+        "tactic": "Reconnaissance",
+        "technique": "Social Media Profiling",
+        "description": "DOBs are used for identity theft or phishing.",
+        "mitigation_id": "M1017"
+    },
+    {
+        "type": "mother's maiden name",
+        "tactic": "Reconnaissance",
+        "technique": "Security Question Harvesting",
+        "description": "Commonly used in password recovery questions.",
+        "mitigation_id": "M1017"
+    },
+    {
+        "type": "driver's license",
+        "tactic": "Reconnaissance",
+        "technique": "Obtain Personal Identifiers",
+        "description": "Used to create forged IDs or accounts.",
+        "mitigation_id": "M1017"
+    },
+    {
+        "type": "mac address",
+        "tactic": "Discovery",
+        "technique": "Network Sniffing",
+        "description": "MAC addresses help identify physical devices on a network.",
+        "mitigation_id": "M1036"
+    },
+    {
+        "type": "device id",
+        "tactic": "Discovery",
+        "technique": "System Information Discovery",
+        "description": "Used to fingerprint or track a user across systems.",
+        "mitigation_id": "M1033"
+    },
+    {
+        "type": "license plate",
+        "tactic": "Reconnaissance",
+        "technique": "Surveillance",
+        "description": "Used to physically track individuals.",
+        "mitigation_id": "M1016"
+    },
+    {
+        "type": "student id",
+        "tactic": "Credential Access",
+        "technique": "Impersonation",
+        "description": "Student IDs are used to access educational systems fraudulently.",
+        "mitigation_id": "M1054"
+    },
+    {
+        "type": "id",
+        "tactic": "Credential Access",
+        "technique": "Impersonation",
+        "description": "IDs are used to access organisational systems fraudulently.",
+        "mitigation_id": "M1054"
+    },
+    {
+        "type": "employee id",
+        "tactic": "Credential Access",
+        "technique": "Masquerading",
+        "description": "Used for impersonating employees or bypassing access control.",
+        "mitigation_id": "M1036"
+    },
+    {
+        "type": "bank account",
+        "tactic": "Exfiltration",
+        "technique": "Exfiltration Over Web Service",
+        "description": "Bank info is exfiltrated via malicious sites or payloads.",
+        "mitigation_id": "M1041"
+    },
+    {
+        "type": "bitcoin address",
+        "tactic": "Command and Control",
+        "technique": "Data Encoding",
+        "description": "Used for receiving ransom payments or laundering.",
+        "mitigation_id": "M1029"
+    },
+    {
+        "type": "social media handle",
+        "tactic": "Reconnaissance",
+        "technique": "Social Media Profiling",
+        "description": "Used to craft tailored social engineering attacks.",
+        "mitigation_id": "M1017"
+    },
+    {
+        "type": "github username",
+        "tactic": "Reconnaissance",
+        "technique": "Code Repository Analysis",
+        "description": "Used to extract emails, tokens, and sensitive files.",
+        "mitigation_id": "M1015"
+    },
+    {
+        "type": "linkedin profile",
+        "tactic": "Reconnaissance",
+        "technique": "Job Information Gathering",
+        "description": "Profiles are used to target employees with phishing.",
+        "mitigation_id": "M1017"
+    },
+    {
+        "type": "credit score",
+        "tactic": "Impact",
+        "technique": "Data Manipulation",
+        "description": "Scores may be targeted to damage reputation or financial standing.",
+        "mitigation_id": "M1050"
+    },
+    {
+        "type": "school name",
+        "tactic": "Reconnaissance",
+        "technique": "Gather Victim Org Info",
+        "description": "Helps adversaries identify youth targets or institutions.",
+        "mitigation_id": "M1016"
+    },
+    {
+        "type": "employer name",
+        "tactic": "Reconnaissance",
+        "technique": "Identify Roles",
+        "description": "Used to understand internal structures for BEC attacks.",
+        "mitigation_id": "M1016"
+    },
+    {
+        "type": "photo",
+        "tactic": "Reconnaissance",
+        "technique": "Facial Recognition",
+        "description": "Photos are used for facial recognition or impersonation.",
+        "mitigation_id": "M1017"
+    },
+    {
+        "type": "video",
+        "tactic": "Reconnaissance",
+        "technique": "Surveillance",
+        "description": "Videos may be used for behavior analysis or identity theft.",
+        "mitigation_id": "M1016"
+    },
+    {
+        "type": "voice recording",
+        "tactic": "Initial Access",
+        "technique": "Voice Phishing",
+        "description": "Voice recordings may be used to mimic or impersonate a target.",
+        "mitigation_id": "M1017"
+    },
+    {
+        "type": "medical record",
+        "tactic": "Collection",
+        "technique": "Data from Information Repositories",
+        "description": "Medical records are exfiltrated for ransom or blackmail.",
+        "mitigation_id": "M1047"
+    },
+    {
+        "type": "vaccination card",
+        "tactic": "Initial Access",
+        "technique": "Impersonation",
+        "description": "Fake cards may be used to bypass health checks.",
+        "mitigation_id": "M1054"
+    },
+    {
+        "type": "work schedule",
+        "tactic": "Reconnaissance",
+        "technique": "Operational Information Gathering",
+        "description": "Used to plan attacks during absences.",
+        "mitigation_id": "M1016"
+    },
+    {
+        "type": "travel itinerary",
+        "tactic": "Reconnaissance",
+        "technique": "Physical Surveillance",
+        "description": "Used to plan attacks or track victims.",
+        "mitigation_id": "M1016"
+    },
+    {
+        "type": "chat logs",
+        "tactic": "Collection",
+        "technique": "Email Collection",
+        "description": "Chat logs may contain credentials or sensitive info.",
+        "mitigation_id": "M1041"
+    },
+    {
+        "type": "browsing history",
+        "tactic": "Collection",
+        "technique": "Browser Information Discovery",
+        "description": "Used to identify interests and plan targeted attacks.",
+        "mitigation_id": "M1046"
+    },
+    {
+        "type": "search queries",
+        "tactic": "Reconnaissance",
+        "technique": "Search Engine Discovery",
+        "description": "Used to learn about victim preferences or interests.",
+        "mitigation_id": "M1017"
+    },
+    {
+        "type": "cookies",
+        "tactic": "Credential Access",
+        "technique": "Steal Web Session Cookie",
+        "description": "Cookies can be hijacked for session takeovers.",
+        "mitigation_id": "M1056"
+    },
+    {
+        "type": "user agent",
+        "tactic": "Discovery",
+        "technique": "Software Discovery",
+        "description": "Used to determine application versions and fingerprinting.",
+        "mitigation_id": "M1033"
+    },
+    {
+        "type": "wifi name",
+        "tactic": "Reconnaissance",
+        "technique": "Wireless Sniffing",
+        "description": "WiFi SSIDs reveal location or organization info.",
+        "mitigation_id": "M1016"
+    },
+    {
+        "type": "bluetooth device",
+        "tactic": "Discovery",
+        "technique": "Peripheral Device Discovery",
+        "description": "Used to track or attack via Bluetooth.",
+        "mitigation_id": "M1036"
+    },
+    {
+        "type": "location",
+        "tactic": "Reconnaissance",
+        "technique": "GPS Tracking",
+        "description": "Used to track movement and behavior.",
+        "mitigation_id": "M1016"
+    },
+    {
+        "type": "device model",
+        "tactic": "Discovery",
+        "technique": "System Information Discovery",
+        "description": "Helps identify exploit paths for specific models.",
+        "mitigation_id": "M1033"
+    },
+    {
+        "type": "imei number",
+        "tactic": "Discovery",
+        "technique": "Device Identification",
+        "description": "Used to track or clone mobile devices.",
+        "mitigation_id": "M1036"
+    },
+    {
+        "type": "browser version",
+        "tactic": "Discovery",
+        "technique": "Software Discovery",
+        "description": "Used to find known vulnerabilities in the browser.",
+        "mitigation_id": "M1033"
+    },
+    {
+        "type": "operating system",
+        "tactic": "Discovery",
+        "technique": "OS Fingerprinting",
+        "description": "OS detection enables targeting with known exploits.",
+        "mitigation_id": "M1033"
+    },
+    {
+        "type": "vpn provider",
+        "tactic": "Command and Control",
+        "technique": "Non-Standard Port",
+        "description": "VPN metadata may be exploited or blocked by adversaries.",
+        "mitigation_id": "M1031"
+    },
+    {
+        "type": "cloud service",
+        "tactic": "Initial Access",
+        "technique": "Cloud Account Compromise",
+        "description": "Used to gain access to hosted data or services.",
+        "mitigation_id": "M1026"
+    },
+    {
+        "type": "api key",
+        "tactic": "Credential Access",
+        "technique": "Unsecured Credentials",
+        "description": "API keys can be stolen from exposed code or storage.",
+        "mitigation_id": "M1042"
+    },
+    {
+        "type": "environment variable",
+        "tactic": "Credential Access",
+        "technique": "Search Open Directories",
+        "description": "Env variables in logs or configs may expose secrets.",
+        "mitigation_id": "M1042"
     }
 ]

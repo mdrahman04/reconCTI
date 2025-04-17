@@ -7,8 +7,8 @@ from datetime import datetime
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(SCRIPT_DIR)
 
-import scraper  # Import the scraper to use scrape_website()
-from tor_connection import check_tor_status  # Ensure Tor is running before scraping
+import scraper
+from tor_connection import check_tor_status
 
 def load_history():
     if not os.path.exists("history.json"):
@@ -70,7 +70,7 @@ def guided_mode():
     if onion_links == "yes":
         if not check_tor_status():
             print("[Error] Tor is required but is not working. Please check your Tor setup.")
-            return  # Stop execution if Tor is not working
+            return
 
     while True:
         websites = input("\nAdd websites to search (comma-separated): ").strip()
@@ -86,7 +86,6 @@ def guided_mode():
     save_history(history)
     print("\n[Info] Proceeding to scrape the data ...")
 
-    # ✅ Start the scraper
     scraper.scrape_website(search_data)
 
 def commando_mode():
@@ -124,7 +123,7 @@ def commando_mode():
             if onion_links == "yes":
                 if not check_tor_status():
                     print("[Error] Tor is required but is not working. Please check your Tor setup.")
-                    return  # Stop execution if Tor is not working
+                    return
 
             websites = [site.strip() for site in parts[4].split(",")]
             if not websites:
@@ -143,5 +142,4 @@ def commando_mode():
     save_history(history)
     print("\n[Info] Proceeding to scrape the data ...")
 
-    # ✅ Start the scraper
     scraper.scrape_website(search_data)

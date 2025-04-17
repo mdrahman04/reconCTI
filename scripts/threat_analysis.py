@@ -2,7 +2,6 @@ import os
 import json
 import re
 
-# Paths
 CVE_FILE = "dat/cve.json"
 MITRE_FILE = "dat/mitre.json"
 HISTORY_FILE = "history.json"
@@ -90,7 +89,6 @@ def perform_threat_analysis(_):
         matched_value = threat.get("matched_value", "").strip().lower()
         matched_input_types = set()
 
-        # Instead of exact match, check if input value is *in* the matched value
         for input_value, input_type in inputs:
             if input_value in matched_value:
                 matched_input_types.add(input_type)
@@ -104,17 +102,14 @@ def perform_threat_analysis(_):
                 "highlight_link": threat.get("highlight_link")
             }
 
-            # Add CVE info
             local_cve = analyze_against_local_cve(input_type)
             threat_summary.update(local_cve)
 
-            # Add MITRE info
             mitre_mapping = map_to_mitre(input_type)
             threat_summary["mitre_mapping"] = mitre_mapping
 
             full_analysis.append(threat_summary)
 
-    # Write analysis JSON file even if empty
     with open(ANALYSIS_OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(full_analysis, f, indent=4)
 

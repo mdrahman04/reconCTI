@@ -3,7 +3,6 @@ import os
 from fpdf import FPDF
 import webbrowser
 
-# File locations
 ANALYSIS_FILE = "temp_analysis.json"
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPORT_FILE = os.path.join(ROOT_DIR, "threat_report.pdf")
@@ -73,7 +72,6 @@ def generate_pdf_report():
         print("[!] No threat data to generate report.")
         return
 
-    # Group entries by data_type
     grouped = {}
     for entry in data:
         dtype = entry.get("data_type")
@@ -90,7 +88,6 @@ def generate_pdf_report():
         grouped[dtype]["matched_values"].append(entry.get("matched_value", ""))
         grouped[dtype]["websites"].append(entry.get("website", ""))
 
-    # Generate the PDF
     pdf = PDFReport()
     pdf.add_page()
 

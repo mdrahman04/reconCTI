@@ -1,7 +1,7 @@
 from scripts.ui import ui_initialization
 from scripts.modes import guided_mode, commando_mode
 from scripts.threat_analysis import perform_threat_analysis
-from scripts.threat_report import generate_pdf_report  # ✅ Import PDF report function
+from scripts.threat_report import generate_pdf_report
 
 import os
 import json
@@ -14,7 +14,6 @@ def get_latest_result_file():
     if not result_files:
         return None
 
-    # Sort files by numeric value of n in 'sc_result-n.json'
     result_files.sort(key=lambda f: int(re.search(r"sc_result-(\d+)\.json", f).group(1)), reverse=True)
     return result_files[0]
 
@@ -34,7 +33,6 @@ def start_session():
         else:
             print("Invalid choice. Please enter 1 or 2.\n")
 
-    # Prompt to analyze results
     analyse = input("\n[?] Do you want to analyse the search results? (yes/no): ").strip().lower()
     if analyse == "yes":
         latest_file = get_latest_result_file()
@@ -45,7 +43,6 @@ def start_session():
                     all_results = json.load(f)
                     perform_threat_analysis(all_results)
 
-                    # ✅ After analysis, generate the report
                     print("\n[+] Generating Threat Report PDF...")
                     generate_pdf_report()
 
@@ -54,8 +51,6 @@ def start_session():
         else:
             print("[!] No saved result files found. Please save results during scraping.")
 
-
-# Run reconCTI session loop
 while True:
     start_session()
     again = input("\n[?] Do you want to start another session? (yes/no): ").strip().lower()

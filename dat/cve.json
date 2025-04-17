@@ -8,5 +8,245 @@
         "type": "email",
         "possible_risks": ["Phishing", "Spam"],
         "mitigations": ["Use disposable emails", "Enable spam filters"]
+    },
+    {
+        "type": "phone number",
+        "possible_risks": ["Smishing", "Telemarketing spam"],
+        "mitigations": ["Do not share phone numbers publicly", "Use VoIP or burner numbers"]
+    },
+    {
+        "type": "address",
+        "possible_risks": ["Physical tracking", "Doxxing"],
+        "mitigations": ["Avoid publishing full addresses", "Use PO boxes for deliveries"]
+    },
+    {
+        "type": "ip address",
+        "possible_risks": ["Network attacks", "Location tracking"],
+        "mitigations": ["Use VPN", "Avoid clicking suspicious links"]
+    },
+    {
+        "type": "credit card",
+        "possible_risks": ["Financial fraud", "Unauthorized purchases"],
+        "mitigations": ["Mask card numbers online", "Use virtual cards"]
+    },
+    {
+        "type": "passport number",
+        "possible_risks": ["Identity theft", "Document forgery"],
+        "mitigations": ["Keep personal documents private", "Use secure platforms for submission"]
+    },
+    {
+        "type": "social security number",
+        "possible_risks": ["Tax fraud", "Loan fraud"],
+        "mitigations": ["Limit disclosure to trusted entities", "Monitor credit activity"]
+    },
+    {
+        "type": "username",
+        "possible_risks": ["Brute-force attacks", "Account correlation"],
+        "mitigations": ["Avoid reusing usernames", "Use anonymous aliases"]
+    },
+    {
+        "type": "password",
+        "possible_risks": ["Account breaches", "Data leaks"],
+        "mitigations": ["Use strong, unique passwords", "Enable two-factor authentication"]
+    },
+    {
+        "type": "date of birth",
+        "possible_risks": ["Social engineering", "Account recovery abuse"],
+        "mitigations": ["Do not use real birthdays publicly", "Use dummy data where possible"]
+    },
+    {
+        "type": "mother's maiden name",
+        "possible_risks": ["Security question hijack", "Identity theft"],
+        "mitigations": ["Avoid using real answers for security questions", "Use password managers"]
+    },
+    {
+        "type": "driver's license",
+        "possible_risks": ["ID fraud", "Insurance scams"],
+        "mitigations": ["Blur in photos", "Share only with verified entities"]
+    },
+    {
+        "type": "mac address",
+        "possible_risks": ["Device tracking", "Network spoofing"],
+        "mitigations": ["Mask MAC address", "Rotate with spoofing tools"]
+    },
+    {
+        "type": "device id",
+        "possible_risks": ["Tracking", "Targeted malware"],
+        "mitigations": ["Reset or change when possible", "Limit exposure to public apps"]
+    },
+    {
+        "type": "license plate",
+        "possible_risks": ["Tracking", "Doxxing"],
+        "mitigations": ["Blur in photos", "Use privacy license covers"]
+    },
+    {
+        "type": "student id",
+        "possible_risks": ["Impersonation", "Academic fraud"],
+        "mitigations": ["Avoid sharing publicly", "Mask when sharing student profiles"]
+    },
+    {
+        "type": "id",
+        "possible_risks": ["Impersonation", "Phishing"],
+        "mitigations": ["Avoid sharing publicly", "Mask when sharing profiles"]
+    },
+    {
+        "type": "employee id",
+        "possible_risks": ["Corporate impersonation", "Phishing"],
+        "mitigations": ["Limit to internal platforms", "Blur in documents"]
+    },
+    {
+        "type": "bank account",
+        "possible_risks": ["Unauthorized withdrawals", "Social engineering"],
+        "mitigations": ["Use secure apps", "Avoid screenshot sharing"]
+    },
+    {
+        "type": "bitcoin address",
+        "possible_risks": ["Transaction tracking", "Financial targeting"],
+        "mitigations": ["Use mixers", "Use different addresses per transaction"]
+    },
+    {
+        "type": "social media handle",
+        "possible_risks": ["Impersonation", "Doxxing"],
+        "mitigations": ["Use pseudonyms", "Separate personal and professional accounts"]
+    },
+    {
+        "type": "github username",
+        "possible_risks": ["Targeted phishing", "Workplace impersonation"],
+        "mitigations": ["Use 2FA", "Avoid personal info in repos"]
+    },
+    {
+        "type": "linkedin profile",
+        "possible_risks": ["Professional phishing", "Resume cloning"],
+        "mitigations": ["Limit detail visibility", "Accept connections cautiously"]
+    },
+    {
+        "type": "credit score",
+        "possible_risks": ["Financial targeting", "Fraud"],
+        "mitigations": ["Keep reports private", "Use credit monitoring tools"]
+    },
+    {
+        "type": "school name",
+        "possible_risks": ["Targeting minors", "Social engineering"],
+        "mitigations": ["Avoid disclosing in bios", "Remove metadata from photos"]
+    },
+    {
+        "type": "employer name",
+        "possible_risks": ["Corporate social engineering", "Harassment"],
+        "mitigations": ["Keep employment private", "Avoid discussing work online"]
+    },
+    {
+        "type": "photo",
+        "possible_risks": ["Facial recognition", "Deepfakes"],
+        "mitigations": ["Avoid sharing high-res images", "Use watermarking"]
+    },
+    {
+        "type": "video",
+        "possible_risks": ["Manipulation", "Context misuse"],
+        "mitigations": ["Limit visibility", "Use private sharing platforms"]
+    },
+    {
+        "type": "voice recording",
+        "possible_risks": ["Voice spoofing", "Biometric misuse"],
+        "mitigations": ["Avoid sharing voice recordings publicly", "Use synthesized voices"]
+    },
+    {
+        "type": "medical record",
+        "possible_risks": ["Insurance fraud", "Discrimination"],
+        "mitigations": ["Only share with HIPAA-compliant services", "Use data anonymization"]
+    },
+    {
+        "type": "vaccination card",
+        "possible_risks": ["Forgery", "ID theft"],
+        "mitigations": ["Avoid sharing online", "Redact personal info"]
+    },
+    {
+        "type": "work schedule",
+        "possible_risks": ["Stalking", "Targeted attacks"],
+        "mitigations": ["Share internally only", "Avoid public posts"]
+    },
+    {
+        "type": "travel itinerary",
+        "possible_risks": ["Home burglary", "Surveillance"],
+        "mitigations": ["Share after return", "Avoid posting real-time updates"]
+    },
+    {
+        "type": "chat logs",
+        "possible_risks": ["Context manipulation", "Blackmail"],
+        "mitigations": ["Encrypt messages", "Avoid sensitive info sharing"]
+    },
+    {
+        "type": "browsing history",
+        "possible_risks": ["Behavioral profiling", "Blackmail"],
+        "mitigations": ["Use privacy-focused browsers", "Clear history regularly"]
+    },
+    {
+        "type": "search queries",
+        "possible_risks": ["Personal profiling", "Ad targeting"],
+        "mitigations": ["Use DuckDuckGo", "Avoid logged-in searches"]
+    },
+    {
+        "type": "cookies",
+        "possible_risks": ["Tracking", "Session hijacking"],
+        "mitigations": ["Clear cookies often", "Use browser isolation"]
+    },
+    {
+        "type": "user agent",
+        "possible_risks": ["Fingerprinting", "Exploit targeting"],
+        "mitigations": ["Randomize with extensions", "Use common user agents"]
+    },
+    {
+        "type": "wifi name",
+        "possible_risks": ["Location tracking", "Network spoofing"],
+        "mitigations": ["Use generic names", "Disable SSID broadcast"]
+    },
+    {
+        "type": "bluetooth device",
+        "possible_risks": ["Tracking", "Bluejacking"],
+        "mitigations": ["Turn off when unused", "Use randomized device names"]
+    },
+    {
+        "type": "location",
+        "possible_risks": ["Stalking", "Targeted burglary"],
+        "mitigations": ["Disable location sharing", "Review app permissions"]
+    },
+    {
+        "type": "device model",
+        "possible_risks": ["Targeted exploits", "Fingerprinting"],
+        "mitigations": ["Keep software updated", "Hide in web requests"]
+    },
+    {
+        "type": "imei number",
+        "possible_risks": ["Device cloning", "Tracking"],
+        "mitigations": ["Keep private", "Do not share during support chats"]
+    },
+    {
+        "type": "browser version",
+        "possible_risks": ["Exploit targeting", "Fingerprinting"],
+        "mitigations": ["Update browser regularly", "Use anonymity plugins"]
+    },
+    {
+        "type": "operating system",
+        "possible_risks": ["Targeted malware", "Compatibility exploits"],
+        "mitigations": ["Patch OS regularly", "Use system hardening guides"]
+    },
+    {
+        "type": "vpn provider",
+        "possible_risks": ["Trust issues", "Data logging"],
+        "mitigations": ["Use zero-log VPNs", "Review provider reputation"]
+    },
+    {
+        "type": "cloud service",
+        "possible_risks": ["Credential stuffing", "Data breaches"],
+        "mitigations": ["Enable MFA", "Limit cloud sharing"]
+    },
+    {
+        "type": "api key",
+        "possible_risks": ["Unauthorized access", "Service misuse"],
+        "mitigations": ["Rotate keys regularly", "Store securely in vaults"]
+    },
+    {
+        "type": "environment variable",
+        "possible_risks": ["Secrets leak", "Privilege escalation"],
+        "mitigations": ["Do not commit to repos", "Use .env file in .gitignore"]
     }
 ]

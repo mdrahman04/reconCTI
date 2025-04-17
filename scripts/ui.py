@@ -4,7 +4,6 @@ import os
 
 
 def display_ascii_art():
-    # Art logo using - https://patorjk.com/
     art = r"""
                               _____ _______ _____ 
                              / ____|__   __|_   _|
@@ -19,11 +18,11 @@ def display_ascii_art():
 
 def scanning_effect():
     print("\n[*] Scanning system resources...")
-    for _ in range(25):  # Range for longer/shorter animation
+    for _ in range(25):  # range for longer/shorter animation
         for frame in "|/-\\":
             sys.stdout.write(f"\r[*] Initializing scanner... {frame}")
             sys.stdout.flush()
-            time.sleep(0.08)  # Speed of the animation
+            time.sleep(0.08)  # speed of the animation
     print("\r[*] Initializing scanner... Done!      ")
 
 
@@ -39,7 +38,8 @@ def ui_initialization():
     print("\n\n=================================")
     print("        reconCTI  v1.25")
     print("=================================")
-    print("a proactive approach to cyber threat intelligence\n\n")
+    print("a proactive approach to cyber threat intelligence\n")
+    print("created by: https://github.com/mdrahman04\n\n")
 
     print("Select a mode to continue:")
     print("1. Guided Mode - Step-by-step guidance")

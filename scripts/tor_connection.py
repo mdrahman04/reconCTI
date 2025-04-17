@@ -3,7 +3,7 @@ import subprocess
 import time
 import requests
 
-TOR_PROXY = "socks5h://127.0.0.1:9050"  # Default Tor SOCKS5 proxy
+TOR_PROXY = "socks5h://127.0.0.1:9050"  # def Tor SOCKS5 proxy
 
 def is_tor_running():
     """Check if the Tor service is running."""

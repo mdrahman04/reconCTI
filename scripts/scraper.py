@@ -6,7 +6,6 @@ from bs4 import BeautifulSoup
 from collections import defaultdict
 from scripts.tor_connection import get_tor_session
 
-# Constants
 SCRAPE_RESULTS_FILE = "scrape_results.json"
 MAX_MATCHES_PER_PAGE = 10
 DEFAULT_MAX_DEPTH = 2
