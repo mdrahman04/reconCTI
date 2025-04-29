@@ -2,7 +2,7 @@
 
 reconCTI is a command-line-based OSINT tool designed to proactively identify potential cyber threats by scraping websites and analyzing results against known vulnerabilities and MITRE ATT&CK mappings.
 
-## ✔️ Features
+## Features
 
 - Scrapes websites recursively for specific keywords
 - Supports "AND" and "OR" based search modes
@@ -10,7 +10,7 @@ reconCTI is a command-line-based OSINT tool designed to proactively identify pot
 - Matches results against a local CVE and MITRE ATT&CK database
 - Generates threat reports in PDF format
 
-## 🧠 Usage
+## Usage
 
 1. Run the tool and choose your scraping mode (guided or commando).
 2. Enter your target URLs and keywords.
@@ -23,7 +23,7 @@ reconCTI is a command-line-based OSINT tool designed to proactively identify pot
 
 This project is for educational and research purposes only. The author is not responsible for any misuse of the tool.
 
-## 📝 License
+## License
 
 This project is licensed under the [MIT License](LICENSE).
 
